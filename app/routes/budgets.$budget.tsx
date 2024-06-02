@@ -1,5 +1,9 @@
 import {Outlet} from "@remix-run/react";
 import {Card, CardContent, CardHeader, CardTitle} from "~/components/ui/card";
+import {Input} from "~/components/ui/input";
+import {Label} from "~/components/ui/label";
+import {Button} from "~/components/ui/button";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "~/components/ui/table";
 
 export default function Budget() {
   return <div>
@@ -35,11 +39,52 @@ export default function Budget() {
             <CardTitle>Transactions</CardTitle>
           </CardHeader>
           <CardContent>
-            One Two
+            <div className="space-y-4">
+              <div>
+                <Label>Name</Label>
+                <Input/>
+              </div>
+              <div>
+                <Label>Price</Label>
+                <Input/>
+              </div>
+              <div>
+                <Button>Add Transaction</Button>
+              </div>
+            </div>
+            <section className="mt-16">
+              <Table>
+                <TableHeader>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Price</TableHead>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Second Transaction</TableCell>
+                    <TableCell>$5.00</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>First Transaction</TableCell>
+                    <TableCell>$25.00</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Second Transaction</TableCell>
+                    <TableCell>$5.00</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>First Transaction</TableCell>
+                    <TableCell>$25.00</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Second Transaction</TableCell>
+                    <TableCell>$5.00</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </section>
           </CardContent>
         </Card>
       </aside>
-
     </section>
   </div>
 }

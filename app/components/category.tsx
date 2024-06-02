@@ -1,8 +1,12 @@
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "~/components/ui/card";
 import {Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow} from "~/components/ui/table";
 import {Button} from "~/components/ui/button";
+import type {
+  Category as CategoryType,
+  Item as ItemType,
+} from "~/types";
 
-export default function Category({category}: {category: Category}) {
+export default function Category({category}: {category: CategoryType}) {
   return <Card>
     <CardHeader>
       <CardTitle>{category.name}</CardTitle>

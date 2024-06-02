@@ -5,6 +5,6 @@ export type Category = {
 
 export type Item = {
   name: string,
-  planned: int,
-  remaining: int,
+  planned?: int,
+  remaining?: int,
 }
