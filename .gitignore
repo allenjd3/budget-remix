@@ -1,5 +1,5 @@
 node_modules
-/app/db/database.sqlite
+/prisma/app/db
 .idea
 
 /.cache
