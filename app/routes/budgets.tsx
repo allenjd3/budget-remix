@@ -1,4 +1,4 @@
-import {Link, Outlet} from "@remix-run/react";
+import {Link, Outlet, redirect} from "@remix-run/react";
 import {
   CircleUser,
   Menu,
@@ -16,6 +16,16 @@ import {
 } from "~/components/ui/dropdown-menu"
 import { Input } from "~/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet"
+import {LoaderFunction} from "@remix-run/node";
+import {getAuth} from "@clerk/remix/ssr.server";
+
+export const loader: LoaderFunction = async (args) => {
+  const { userId } = await getAuth(args);
+  if (!userId) {
+    return redirect("/sign-in");
+  }
+  return {};
+}
 
 export default function Budgets() {
   return (
