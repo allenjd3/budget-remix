@@ -11,12 +11,47 @@ datasource db {
 }
 
 model Budget {
-  id        Int      @id @default(autoincrement())
-  userId    String
-  label     String
-  createdAt DateTime
-  startDate DateTime
-  endDate   DateTime
+  id           Int           @id @default(autoincrement())
+  userId       String
+  label        String
+  createdAt    DateTime
+  startDate    DateTime
+  endDate      DateTime
+  transactions Transaction[]
+  items        Item[]
 
   @@map("budgets")
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  items Item[]
+
+  @@map("categories")
+}
+
+model Item {
+  id         Int      @id @default(autoincrement())
+  budget     Budget   @relation(fields: [budgetId], references: [id])
+  budgetId   Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  name       String
+  amount     Int
+  planned    Int
+  createdAt  DateTime
+
+  @@map("items")
+}
+
+model Transaction {
+  id        Int      @id @default(autoincrement())
+  budget    Budget   @relation(fields: [budgetId], references: [id])
+  budgetId  Int
+  name      String
+  amount    Int
+  createdAt DateTime
+
+  @@map("transactions")
 }
