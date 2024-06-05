@@ -1,7 +1,7 @@
 import {Button} from "~/components/ui/button";
 import {Budget} from "@prisma/client";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "~/components/ui/table";
-import {Form, useLoaderData} from "@remix-run/react";
+import {Form, useLoaderData, useNavigate} from "@remix-run/react";
 import {addDays, format} from "date-fns";
 import {Input} from "~/components/ui/input";
 import {Label} from "~/components/ui/label";
@@ -14,7 +14,6 @@ import {DateRange} from "react-day-picker";
 import {ActionFunction, json, LoaderFunction} from "@remix-run/node";
 import {getAuth} from "@clerk/remix/ssr.server";
 import {BudgetRequest, createBudget, getBudgets} from "~/lib/budgets";
-import {z} from 'zod'
 
 export const action: ActionFunction = async (args) => {
     const { userId } = await getAuth(args);
@@ -65,6 +64,7 @@ export default function Index() {
 }
 
 function ShowBudgets({budgets}: { budgets: Budget[] }) {
+  const navigate = useNavigate()
   return <div>
     <Table>
       <TableHeader>
@@ -76,11 +76,13 @@ function ShowBudgets({budgets}: { budgets: Budget[] }) {
         {budgets.map((budget) => {
           const startDate = new Date(budget.startDate)
           const endDate = new Date(budget.endDate)
-          return <TableRow key={budget.id}>
-            <TableCell>{budget.label}</TableCell>
-            <TableCell>{format(startDate, "MMMM d, yyyy")}</TableCell>
-            <TableCell>{format(endDate, "MMMM d, yyyy")}</TableCell>
-          </TableRow>
+          return (
+            <TableRow key={budget.id} onClick={() => navigate(`/budgets/${budget.id}`)}>
+                <TableCell>{budget.label}</TableCell>
+                <TableCell>{format(startDate, "MMMM d, yyyy")}</TableCell>
+                <TableCell>{format(endDate, "MMMM d, yyyy")}</TableCell>
+            </TableRow>
+          );
         })}
       </TableBody>
     </Table>
