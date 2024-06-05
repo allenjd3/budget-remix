@@ -14,7 +14,7 @@ model Budget {
   id           Int           @id @default(autoincrement())
   userId       String
   label        String
-  createdAt    DateTime
+  createdAt    DateTime      @default(now())
   startDate    DateTime
   endDate      DateTime
   transactions Transaction[]
